@@ -1,0 +1,13 @@
+football:
+  outputs:
+    dev:
+      dbname: postgres
+      host: localhost
+      pass: admin123
+      port: 5430
+      schema: analytics
+      threads: 1
+      type: postgres
+      user: admin
+  target: dev
+

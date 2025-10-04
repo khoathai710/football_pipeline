@@ -1,0 +1,31 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+.venv/
+.env/
+ENV/
+emv/
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Dagster local files
+dagster_home/.nux/
+dagster_home/.telemetry/
+dagster_home/logs/
+
+# MySQL runtime files
+mysql/*.sock
+mysql/*.pid
+mysql/*.err
+mysql/ib_logfile*
+mysql/ibdata*
+mysql/binlog.*
+mysql/#*
+mysql/auto.cnf
+mysql/ib_buffer_pool
+mysql/binlog.index
