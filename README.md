@@ -10,7 +10,8 @@ The Chatbot retrieves data from the data warehouse and interacts with users to a
 
 ## 2. Design
 ### 2.1 Data pipeline
-<img width="959" height="528" alt="image" src="https://github.com/user-attachments/assets/6148f3a7-114a-40d2-8f3d-90d5e6fea365" /> \
+<img width="959" height="528" alt="Screenshot 2025-10-02 235535" src="https://github.com/user-attachments/assets/098deeab-06e6-4f9a-81a6-8287f82ab5b7" />
+
 - We use Docker to containerize the application and Dagster to orchestrate assets.
 - Data sources:  
   - Web: [premierleague.com](https://www.premierleague.com) for matches, match details, players, clubs, …  
@@ -21,7 +22,7 @@ The Chatbot retrieves data from the data warehouse and interacts with users to a
 - The transformed data is loaded into PostgreSQL as the data warehouse and further modeled into data marts using dbt.  
 - Finally, a Chatbot is created to query the data marts, allowing users to ask questions such as "Who is leading in goals?"
 ### 2.2 Project Structure
-<img width="440" height="564" alt="image" src="https://github.com/user-attachments/assets/3f598ab8-2d2d-4c3e-b4a6-291e9b6b4566" />
+<img width="440" height="564" alt="Screenshot 2025-10-03 122929" src="https://github.com/user-attachments/assets/b30afebf-ea62-4a11-b03a-f6fbda6cc532" />
 
 - **chatbot/**: Source code of the ScoutAI Chatbot.  
 - **Dagster/**: Configurations and asset definitions for Dagster pipelines.  
@@ -36,7 +37,8 @@ The Chatbot retrieves data from the data warehouse and interacts with users to a
 - **requirements.txt**: Python dependencies list.  
 
 ### 2.3 Datalake structure
-<img width="411" height="655" alt="image" src="https://github.com/user-attachments/assets/382358ea-78df-4ad6-a07a-1476e2b8b67f" />
+<img width="411" height="655" alt="Screenshot 2025-10-03 122533" src="https://github.com/user-attachments/assets/6230e156-1b13-4dde-96ba-89e640f6d340" />
+
 
 - The data lake is organized into three layers: **bronze**, **silver**, and **gold**.  
 - All datasets are stored in **Parquet** format for efficient storage and querying.  
@@ -44,16 +46,19 @@ The Chatbot retrieves data from the data warehouse and interacts with users to a
 
 ### 2.3 Data linage
 #### 2.3.1 Global linage
-<img width="919" height="355" alt="image" src="https://github.com/user-attachments/assets/e68dc984-c362-444d-b388-6475589c56a2" /> \
+<img width="919" height="355" alt="Screenshot 2025-10-03 001208" src="https://github.com/user-attachments/assets/72173be4-70bf-4b99-a825-81a5f72854c9" />
+
 #### 2.3.2 Bronze layer
-<img width="1686" height="465" alt="image" src="https://github.com/user-attachments/assets/ea74f286-faee-4b45-ae10-af2160edf642" /> 
+<img width="1686" height="465" alt="Screenshot 2025-10-03 001351" src="https://github.com/user-attachments/assets/506818cd-3e74-4110-b896-4ffd9be783d8" />
+
 
 - **bronze_matches_dataset**: contains all information about matches such as goals, assists, cards, referees, substitutions, … and is materialized weekly  
 - **bronze_football_stadiums_dataset**: contains information about the stadiums of each team and is materialized once  
 - **bronze_player_info_dataset**: contains information about players (e.g., name, age, nationality, position, …) and is materialized once  
 - **bronze_teams_dataset**: contains information about teams (e.g., club name, manager, squad, …) and is materialized once
 #### 2.3.3 Silver layer
-<img width="1776" height="420" alt="image" src="https://github.com/user-attachments/assets/51b9be32-b7cd-44b2-ad1a-d7d63c4342e8" />
+<img width="1740" height="378" alt="Screenshot 2025-10-03 002017" src="https://github.com/user-attachments/assets/d4fd33a1-3406-4845-9675-946ea059ca7e" />
+
 
 - silver_goals_assists: extract and normalize goals & assists per match (weekly).  
 - silver_cards: process yellow/red cards with time and player info (weekly).  
@@ -63,7 +68,7 @@ The Chatbot retrieves data from the data warehouse and interacts with users to a
 - silver_team_info: combine team info with stadium details (one-time).  
 
 #### 2.3.4 Gold layer
-<img width="1085" height="347" alt="image" src="https://github.com/user-attachments/assets/6eddde18-6b56-4d10-886c-8bf60deabc56" />
+<img width="1092" height="334" alt="Screenshot 2025-10-03 002413" src="https://github.com/user-attachments/assets/2ef6c205-1010-4e99-ac86-3f6a971f7e4e" />
 
 - gold_goals_assists: integrate goals & assists with player details (weekly, Spark)  
 - gold_cards: integrate card events with player details (weekly, Spark)  
@@ -74,10 +79,10 @@ The Chatbot retrieves data from the data warehouse and interacts with users to a
 
 ### 2.4 Containerize
 <p float="left">
-  <img width="45%" height="666" alt="image" src="https://github.com/user-attachments/assets/de24e2f2-6329-4740-b068-a0019db9b20c" />
-  <img width="45%" height="540" alt="image" src="https://github.com/user-attachments/assets/28d944e4-efda-4ec8-ae0b-9056161625a1" />
-</p>
+  <img width="45%" height="540" alt="Screenshot 2025-10-03 120407" src="https://github.com/user-attachments/assets/ecfd9d0f-1173-42e4-b058-0592b394149c" />
+<img width="45%" height="666" alt="Screenshot 2025-10-03 120416" src="https://github.com/user-attachments/assets/6fbda0eb-141d-4303-b52a-2156aed528dd" />
 
+</p>
 
 **etl_pipeline**
 - ports: none exposed  
@@ -133,16 +138,20 @@ To retrieve information about a specific match, the pipeline follows these steps
 
 1. **Access the website** [premierleague.com](https://www.premierleague.com)  
    Welcome page:  
-   <img width="1883" height="822" alt="image" src="https://github.com/user-attachments/assets/9cde0dbd-47ae-4fac-b858-df0ff54594b4" />
+  <img width="1883" height="822" alt="Screenshot 2025-10-03 120926" src="https://github.com/user-attachments/assets/d9ca6589-44ad-470e-aa13-e4a6c631a0aa" />
+
 
 2. **Navigate to the match page**  
-   <img width="1885" height="828" alt="Screenshot 2025-10-03 121055" src="https://github.com/user-attachments/assets/98277ca0-4f06-4c57-a74e-9717f92493cd" />
+   <img width="1885" height="828" alt="Screenshot 2025-10-03 121055" src="https://github.com/user-attachments/assets/f199f6c0-7cdf-45e7-ad1f-6641ef42c8c5" />
+
 
 3. **Collect detailed information from multiple tabs** (e.g., *Recap*, *Lineups*, *Stats*)  
-   <img width="1891" height="829" alt="Screenshot 2025-10-03 121542" src="https://github.com/user-attachments/assets/6f2ce387-1c64-4060-af57-c7328cff7f06" />
+   <img width="1891" height="829" alt="Screenshot 2025-10-03 121542" src="https://github.com/user-attachments/assets/7df086f0-7ffd-4a4f-9e7a-7d48a6b5b7b9" />
+
 4. All match data will be crawled using **Selenium**, extracted into **JSON format**, and then stored in **MinIO** for the next ETL steps.  
    For example, the following HTML snippet contains information about goals and assists:  
-   <img width="434" height="388" alt="Screenshot 2025-10-03 122136" src="https://github.com/user-attachments/assets/d360e3f2-e4b3-499b-a54a-9c3d89c141fb" />
+
+<img width="441" height="304" alt="Screenshot 2025-10-03 122108" src="https://github.com/user-attachments/assets/81530880-782a-4139-a428-ad9e6506b91a" />
 
   
 ## 4. Transformation with dbt
@@ -152,7 +161,8 @@ To build the models, simply run:
 ```bash
 dbt run
 ```
-<img width="1046" height="545" alt="image" src="https://github.com/user-attachments/assets/474c176a-d5a8-4b5a-8462-8029e0e2f65b" />
+
+<img width="1046" height="545" alt="Screenshot 2025-10-03 123911" src="https://github.com/user-attachments/assets/09557e25-4edf-446e-b205-dde298a42099" />
 
 
 ## 5. Chatbot
@@ -163,8 +173,10 @@ The chatbot is designed to:
 - Help users explore insights from the **ETL & dbt pipeline** in a simple way.
 
 <p float="left">
-  <img src="https://github.com/user-attachments/assets/d335e42c-c943-4c1d-b833-453ba8e1cf5f" width="45%" />
-  <img src="https://github.com/user-attachments/assets/2e93661b-9154-4794-b933-dfa8fdcd0f4b" width="45%" />
+  <img width="1140" height="663" alt="Screenshot 2025-10-02 211158" 
+       src="https://github.com/user-attachments/assets/8483aaf2-f360-4f3e-9b96-d3b08cc1123a" />
+  <img width="1140" height="663" alt="Screenshot 2025-10-02 211210" 
+       src="https://github.com/user-attachments/assets/249de9fb-8774-4a7a-85ef-2216d994252b" />
 </p>
 
 ## 6. Acknowledgments
