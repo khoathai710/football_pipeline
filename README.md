@@ -173,9 +173,9 @@ The chatbot is designed to:
 - Help users explore insights from the **ETL & dbt pipeline** in a simple way.
 
 <p float="left">
-  <img width="1140" height="663" alt="Screenshot 2025-10-02 211158" 
+  <img width="45%" height="663" alt="Screenshot 2025-10-02 211158" 
        src="https://github.com/user-attachments/assets/8483aaf2-f360-4f3e-9b96-d3b08cc1123a" />
-  <img width="1140" height="663" alt="Screenshot 2025-10-02 211210" 
+  <img width="45%" height="663" alt="Screenshot 2025-10-02 211210" 
        src="https://github.com/user-attachments/assets/249de9fb-8774-4a7a-85ef-2216d994252b" />
 </p>
 
